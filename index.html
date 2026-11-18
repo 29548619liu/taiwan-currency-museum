@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0c1020">
+<title>貨幣時空博物館｜從清末到現代——臺灣貨幣的演變</title>
+<style>
+:root{--ink:#101827;--night:#0b1020;--mid:#18253b;--gold:#f4cb78;--cream:#fff0c9;--faded:#adbad0;--mint:#77e0c4;--red:#ff8d9a;--line:#667694;--panel:#172036;--white:#fffaef}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#243450 0%,#111a2a 49%,#080c16 100%);color:var(--cream);font-family:ui-monospace,Consolas,"Noto Sans TC","Microsoft JhengHei",monospace;letter-spacing:.035em;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(transparent 95%,#7d8fba 96%),linear-gradient(90deg,transparent 95%,#7d8fba 96%);background-size:28px 28px;z-index:-1}
+.site{max-width:1120px;margin:0 auto;padding:23px 20px 36px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.08em;font-size:15px}.brandmark{width:33px;height:33px;display:grid;place-items:center;color:#172036;background:#eeca7a;border:3px solid #ffe3a7;box-shadow:4px 4px 0 #39415c;font-size:18px}.top-right{color:var(--faded);font-size:11px;text-align:right;line-height:1.7}.tag{color:var(--mint)}.sub{font-size:12px;color:#99a7be;line-height:1.8;margin:16px 0 0;text-align:center}
+.frame{border:5px solid #a9b7ca;background:#0d1320;box-shadow:0 0 0 4px #2e3e59,0 18px 0 #050914,0 30px 52px #0008;position:relative;isolation:isolate;overflow:hidden}.frame:before,.frame:after{content:"";position:absolute;width:16px;height:16px;border:4px solid #f7d795;z-index:10;pointer-events:none}.frame:before{top:0;left:0;border-right:0;border-bottom:0}.frame:after{right:0;bottom:0;border-left:0;border-top:0}
+.game{position:relative;width:100%;aspect-ratio:16/9;background:#12192d;overflow:hidden}canvas#world{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}.screen-lines{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,#06102412 4px);pointer-events:none;z-index:1;mix-blend-mode:multiply}
+.hud{position:absolute;top:16px;left:17px;right:17px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;z-index:2;pointer-events:none}.hud-chip{background:#0c162edb;border:2px solid #65728c;padding:8px 11px;box-shadow:3px 3px 0 #040912;font-size:12px;line-height:1.4}.hud-chip strong{color:#ffdf99}.hud-chip small{font-size:10px;color:#c1cce0}.progress{width:160px;height:9px;background:#26374c;border:1px solid #7787a1;margin-top:6px}.fill{height:100%;width:0;background:#f2ca7d;transition:width .1s}
+.hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;text-align:center;background:#101a32e8;border:2px solid #6e82a0;box-shadow:3px 3px 0 #050a13;padding:8px 14px;font-size:11px;color:#e9ebee;pointer-events:none}.key{display:inline-block;border:1px solid #f4ce84;padding:1px 5px;min-width:19px;text-align:center;background:#27344b;color:#ffe7a6;margin:0 2px}
+.overlay{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;overflow:auto;padding:clamp(12px,4%,34px);background:#050b18ba;backdrop-filter:blur(2px)}.overlay.hidden{display:none}.panel{background:#172137;border:3px solid #edd08b;box-shadow:0 0 0 4px #1b2940,9px 9px 0 #050a17,0 20px 70px #0009;width:min(790px,100%);max-height:100%;overflow-y:auto;padding:clamp(17px,3.1vw,34px);position:relative}.panel:before{content:"";height:7px;position:absolute;top:0;left:0;right:0;background:repeating-linear-gradient(90deg,#e8c77d 0 14px,#9c794c 14px 19px,#2b3950 19px 22px)}.eyebrow{color:#80e4c7;font-size:12px;font-weight:900;letter-spacing:.2em;margin-bottom:10px}.display{font-size:clamp(22px,3.5vw,44px);line-height:1.45;text-shadow:4px 4px 0 #090d17;margin:0 0 15px;font-weight:900;letter-spacing:.06em}.display .accent,.accent{color:#f4d38e}.intro{font-size:14px;line-height:1.9;color:#c1ccdc;margin:0 0 18px}.button{appearance:none;border:2px solid #ffe1a8;background:#e8c17b;color:#162036;font:900 15px inherit;font-weight:900;font-family:inherit;padding:12px 17px;cursor:pointer;box-shadow:5px 5px 0 #88653a;transition:transform .1s,box-shadow .1s}.button:hover,.button:focus-visible{background:#ffe1a1;outline:2px solid #fff3cf;outline-offset:3px;transform:translate(-1px,-1px);box-shadow:6px 6px 0 #88653a}.button:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #88653a}.button.ghost{background:#23314a;color:#fff0ca;border-color:#9fb4d0;box-shadow:4px 4px 0 #070e19}.button.ghost:hover{background:#354863}.button.small{padding:9px 14px;font-size:12px}.button:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin-top:21px}.secondary{font-size:12px;color:#a6b9d0;line-height:1.7}
+.avatars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:21px 0}.avatar{background:#0f1a2d;border:3px solid #53637d;box-shadow:4px 4px 0 #070c16;text-align:center;padding:12px 6px 11px;cursor:pointer;color:var(--cream);font-family:inherit;position:relative;min-width:0}.avatar.selected{border-color:#f2d085;background:#263347;box-shadow:0 0 0 2px #f2d085,5px 5px 0 #0b1020}.avatar canvas{height:88px;width:76px;image-rendering:pixelated;display:block;margin:0 auto 8px}.avatar strong{font-size:14px;display:block;line-height:1.55}.avatar span{font-size:11px;color:#afc2d7;display:block;margin-top:4px}.avatar.selected:after{content:"✓";position:absolute;right:7px;top:4px;color:#a5f9d4}
+.card-title{font-size:clamp(19px,2.6vw,29px);margin:5px 0 10px;line-height:1.5;color:#ffdfa0;font-weight:900}.artifact-layout{display:grid;grid-template-columns:190px 1fr;gap:21px;align-items:start;margin-top:16px}.artifact-box{background:repeating-linear-gradient(45deg,#1e2b40,#1e2b40 11px,#26374c 11px,#26374c 22px);border:3px solid #667d95;min-height:159px;display:grid;place-items:center;padding:15px}.artifact-box canvas{width:100%;image-rendering:pixelated}.artifact-box small{font-size:10px;color:#d2dded;text-align:center;line-height:1.65}.description{line-height:1.95;color:#dae1e8;font-size:13px}.meta{color:#83dfc7;font-size:11px;line-height:1.85;margin:8px 0}.source{color:#a9b9d0;font-size:11px;line-height:1.8;margin-top:14px}.source a{color:#ffdb97;text-underline-offset:4px}.divider{border:0;border-top:1px dashed #576983;margin:17px 0}.big-number{font-size:12px;color:#9cc2df;letter-spacing:.16em}.question{font-size:clamp(17px,2.2vw,24px);line-height:1.55;margin:13px 0 20px}.choices{display:grid;gap:10px}.choice{display:flex;align-items:center;gap:12px;width:100%;background:#253650;border:2px solid #7388a8;text-align:left;color:#fff2d6;box-shadow:4px 4px 0 #08101b;padding:11px 13px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;line-height:1.5}.choice:hover,.choice:focus-visible{background:#3b526e;border-color:#f0d58f;outline:0}.choice em{display:grid;place-items:center;font-style:normal;min-width:26px;height:26px;background:#e8c87d;color:#17243b;font-weight:900}.note{border-left:4px solid #78d8bc;padding:6px 0 6px 12px;font-size:11px;line-height:1.8;color:#b2c5d6;margin-top:15px}.wrong{text-align:center}.skull{font-size:clamp(45px,8vw,80px);filter:drop-shadow(5px 5px 0 #190f24);line-height:1.3}.health{color:#ff98a4;font-size:14px;letter-spacing:.3em}.end-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}.end-col{padding:15px;border:2px solid #65768c;background:#101b31}.end-col strong{display:block;color:#e7c887;margin-bottom:7px}.end-col p{margin:0;font-size:12px;color:#bacadd;line-height:1.7}.controls{display:none;justify-content:center;align-items:center;gap:10px;padding-top:19px;flex-wrap:wrap;touch-action:none}.controls button{min-width:52px;min-height:48px;background:#243650;border:2px solid #93a8c1;color:#f8df9e;font-weight:900;font-family:inherit;cursor:pointer}.controls button:active{background:#6b7994}.controls .wide{min-width:95px}.bottom{display:flex;justify-content:space-between;gap:15px;align-items:center;margin:22px 2px 0}.legend{font-size:11px;color:#8396ad;line-height:1.8}.status{display:flex;gap:9px;align-items:center;color:#e3c47b;font-size:11px;letter-spacing:.05em}
+@media(max-width:680px){.site{padding:13px 10px 27px}.brand{font-size:11px}.top-right{font-size:9px}.frame{border-width:3px}.game{aspect-ratio:4/5;min-height:495px}#world{object-fit:cover}.hud{left:9px;right:9px;top:10px}.hud-chip{font-size:10px;padding:5px 6px}.hud-chip small{font-size:9px}.progress{width:76px}.overlay{padding:12px}.panel{padding:19px 15px}.display{font-size:26px}.avatars{gap:8px}.avatar{padding:8px 2px}.avatar canvas{width:53px;height:68px}.avatar strong{font-size:11px}.avatar span{font-size:9px}.artifact-layout{grid-template-columns:1fr;gap:8px}.artifact-box{min-height:105px;padding:8px}.artifact-box canvas{max-width:150px}.artifact-box small{display:none}.controls{display:flex}.hint{display:none}.end-cols{grid-template-columns:1fr}.bottom{flex-wrap:wrap}.choice{font-size:12px;padding:10px 7px}.intro{font-size:12px}.sub{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* V2: real collection imagery, more readable galleries and the egg challenge */
+.museum-photo[hidden],.photo-error[hidden]{display:none!important}
+.panel>.actions{position:sticky;bottom:0;background:#172137;padding:10px 0 5px;margin-top:13px;z-index:3}
+
+.artifact-layout{grid-template-columns:265px minmax(0,1fr);gap:22px}
+.real-artifact{display:block;min-height:210px;padding:12px;background:#121d30;border-color:#8d795b}
+.photo-stage{display:grid;place-items:center;min-height:180px;background:#0e1725;padding:7px;border:1px solid #53647e}
+.museum-photo{display:block;width:100%;height:230px;max-height:36vh;object-fit:contain;image-rendering:auto;border:0}
+.photo-error{color:#f6dbaa;text-align:center;font-size:12px;line-height:1.9;padding:20px 10px}
+.photo-error a{color:#a2e3ef}
+.artifact-box small,.quiz-photo small{display:block;font-size:10px;color:#b8c6d6;line-height:1.7;margin-top:9px}
+.artifact-text{min-width:0}
+.description strong{color:#ffe1a1;font-size:13px}
+.description p{margin:3px 0 12px;line-height:1.75}
+.source{margin-top:6px;border-top:1px solid #42536e;padding-top:9px}
+.chapter-rules{display:grid;gap:8px;background:#111d32;border:2px solid #4b6581;padding:13px 15px;line-height:1.8;font-size:13px}
+.chapter-rules strong{color:#ffdc99}
+.quiz-layout{display:grid;grid-template-columns:205px minmax(0,1fr);gap:19px;align-items:start}
+.quiz-photo{background:#111d30;border:2px solid #71859c;padding:7px;min-width:0}
+.quiz-photo .museum-photo{height:175px;max-height:26vh}
+.quiz-photo .photo-stage{min-height:150px}
+.egg-question{font-size:15px;color:#ffe8b2;margin:0 0 10px;line-height:1.6}
+.egg-question span{color:#a5dfce;font-weight:900}
+.answer-eggs{background:#162a3f;border:2px solid #6ba995;padding:10px 15px;color:#ffe9ad;font-size:19px}
+.note{font-size:11px}
+@media(max-width:740px){.artifact-layout{grid-template-columns:1fr;gap:10px}.real-artifact{min-height:0}.museum-photo{height:190px;max-height:32vh}.quiz-layout{grid-template-columns:1fr;gap:8px}.quiz-photo .museum-photo{height:135px;max-height:22vh}.quiz-photo .photo-stage{min-height:70px}.chapter-rules{font-size:11px;padding:9px}.description p{line-height:1.65}}
+
+
+/* V3: screen-filling playfield. All chapters use the same viewport. */
+html,body{width:100%;height:100%;overflow:hidden}
+body{min-height:100dvh;background:#07101d}
+body:before{opacity:.06}
+.site{width:100vw;max-width:none;height:100dvh;min-height:400px;padding:0;display:flex;flex-direction:column;overflow:hidden}
+.top{height:49px;min-height:49px;padding:5px clamp(12px,2.5vw,30px);margin:0;background:#0a1325;border-bottom:2px solid #3a4860}
+.brand{font-size:14px}
+.top-right{font-size:10px}
+.frame{flex:1;min-height:0;width:100%;border:0;box-shadow:none;overflow:hidden}
+.frame:before,.frame:after{display:none}
+.game{width:100%;height:100%;min-height:0;aspect-ratio:auto}
+.bottom{height:32px;min-height:32px;margin:0;padding:4px 16px;border-top:2px solid #43536c;background:#0a1325;overflow:hidden}
+.bottom .legend{font-size:10px;white-space:nowrap}
+.bottom .legend br{display:none}
+.bottom .status{font-size:10px}
+.hud{top:15px;left:20px;right:20px}
+.hint{bottom:20px}
+/* Chapters 2 and conclusion: not modal boxes. Each chapter becomes a full-screen scene. */
+.overlay.stage-overlay{padding:0;background:linear-gradient(130deg,#071327fa,#13253dfc 55%,#071125fa);align-items:stretch;justify-content:center;backdrop-filter:none;overflow:hidden}
+.overlay.stage-overlay .panel{width:100%;max-width:none;height:100%;max-height:none;min-height:0;border:0;box-shadow:none;overflow-y:auto;background:transparent;padding:clamp(28px,5vh,70px) clamp(25px,7vw,108px) clamp(20px,4vh,40px);display:flex;flex-direction:column;justify-content:center;gap:clamp(6px,1.1vh,12px)}
+.overlay.stage-overlay .panel:before{display:none}
+.overlay.stage-overlay .panel>.actions{position:static;bottom:auto;background:none;margin-top:13px;padding:0;z-index:0}
+.overlay.stage-overlay .display{font-size:clamp(34px,5.7vw,76px);margin:0 0 8px;line-height:1.22}
+.overlay.stage-overlay .intro{font-size:clamp(14px,1.5vw,20px);max-width:1000px;margin:4px 0 12px}
+.overlay.stage-overlay .eyebrow{font-size:clamp(11px,1.1vw,15px)}
+.overlay.stage-overlay .chapter-rules{font-size:clamp(14px,1.5vw,19px);max-width:750px;gap:10px;background:#0c1930b8;padding:clamp(14px,2vw,28px)}
+.overlay.stage-overlay .quiz-layout{display:grid;grid-template-columns:minmax(250px,4fr) minmax(280px,6fr);gap:clamp(20px,4vw,64px);align-items:center;max-width:1260px;width:100%;margin:0 auto}
+.overlay.stage-overlay .big-number{font-size:clamp(12px,1.5vw,18px)}
+.overlay.stage-overlay .question{font-size:clamp(21px,2.3vw,35px);max-width:1220px;margin:7px 0 10px}
+.overlay.stage-overlay .quiz-photo{display:flex;flex-direction:column;justify-content:center;max-width:none;min-width:0;padding:clamp(9px,2vw,25px);border:4px solid #a08f64;background:linear-gradient(130deg,#1a2b43,#0c182b)}
+.overlay.stage-overlay .quiz-photo .photo-stage{min-height:180px;max-height:none;height:min(34vh,365px)}
+.overlay.stage-overlay .quiz-photo .museum-photo{width:100%;max-width:100%;height:100%;max-height:none;object-fit:contain}
+.overlay.stage-overlay .quiz-photo small{margin-top:8px;font-size:12px;color:#c2d0dc}
+.overlay.stage-overlay .egg-question{font-size:clamp(17px,2vw,27px);margin-bottom:15px}
+.overlay.stage-overlay .choice{padding:clamp(10px,1.4vw,19px) clamp(13px,2vw,28px);font-size:clamp(15px,1.6vw,22px);border-width:3px}
+.overlay.stage-overlay .choices{gap:clamp(10px,1.6vh,18px)}
+.overlay.stage-overlay .note{margin:8px auto 0;max-width:1260px;width:100%;font-size:12px}
+.overlay.stage-overlay .end-cols{gap:clamp(12px,1.7vw,26px);width:100%;margin:15px 0 24px}
+.overlay.stage-overlay .end-col{padding:clamp(12px,2.2vw,32px);background:#0c1a30;border:3px solid #756d66}
+.overlay.stage-overlay .end-col strong{font-size:clamp(15px,1.7vw,23px)}
+.overlay.stage-overlay .end-col p{font-size:clamp(12px,1.1vw,16px);line-height:1.9}
+.overlay.stage-overlay .wrong{text-align:center}
+.overlay.stage-overlay .answer-eggs{font-size:clamp(20px,3vw,40px);padding:18px;max-width:500px}
+.stage-overlay .scene-divider{height:7px;width:min(210px,36vw);background:repeating-linear-gradient(90deg,#f4d38e 0 22px,#9e8057 22px 26px,transparent 26px 35px);margin:12px 0}
+.overlay.stage-overlay[data-stage="quiz"]{background:radial-gradient(circle at 23% 48%,#39535a99 0%,transparent 38%),linear-gradient(120deg,#0e1c2d 0%,#162842 52%,#0a1527 100%)}
+.overlay.stage-overlay[data-stage="finish"]{background:radial-gradient(circle at 48% 5%,#685438a1 0%,transparent 48%),linear-gradient(140deg,#0b172c 0%,#1a2842 68%,#081222 100%)}
+.overlay.stage-overlay[data-stage="fail"]{background:radial-gradient(circle,#541a32 0%,#17152a 50%,#060c19 100%)}
+.overlay.stage-overlay[data-stage="success"]{background:radial-gradient(circle at 70% 30%,#254f4b 0%,#102539 50%,#081525 100%)}
+.fullscreen-button{position:absolute;top:15px;left:50%;transform:translateX(-50%);z-index:6;border:2px solid #71869b;color:#e5d4a0;background:#101c30dd;cursor:pointer;padding:7px 12px;font:800 11px ui-monospace,monospace}
+.fullscreen-button:hover{border-color:#f1d08b;background:#253550}
+@media(max-width:740px){
+ .site{min-height:0}.top{height:43px;min-height:43px;padding:4px 10px}.brand{font-size:12px}.top-right{font-size:9px}
+ .game{aspect-ratio:auto;min-height:0}.controls{display:flex;min-height:58px;padding:4px 4px;background:#0a1325;flex:0 0 auto;gap:5px}.controls button{min-height:45px;min-width:47px}
+ .bottom{display:none}.fullscreen-button{top:auto;bottom:12px;left:auto;right:10px;transform:none;padding:4px 7px;font-size:9px}
+ .overlay.stage-overlay .panel{justify-content:flex-start;padding:54px 16px 20px;gap:7px}
+ .overlay.stage-overlay .display{font-size:clamp(25px,6vw,39px)}
+ .overlay.stage-overlay .intro{font-size:13px;margin:3px 0 7px}
+ .overlay.stage-overlay .chapter-rules{font-size:12px;gap:5px;padding:10px}
+ .overlay.stage-overlay .quiz-layout{display:grid;grid-template-columns:1fr;gap:7px}
+ .overlay.stage-overlay .question{font-size:clamp(16px,4.1vw,22px);margin:2px 0}
+ .overlay.stage-overlay .quiz-photo{padding:5px;max-height:25vh}
+ .overlay.stage-overlay .quiz-photo .photo-stage{height:15vh;min-height:60px}
+ .overlay.stage-overlay .quiz-photo small{font-size:9px;margin-top:2px}
+ .overlay.stage-overlay .choices{gap:6px}.overlay.stage-overlay .choice{font-size:13px;padding:8px}
+ .overlay.stage-overlay .egg-question{font-size:13px;margin:0 0 4px}
+ .overlay.stage-overlay .note{font-size:10px;margin:0}
+ .overlay.stage-overlay .end-cols{grid-template-columns:1fr;gap:8px;margin:8px 0}
+ .overlay.stage-overlay .end-col{padding:10px}.overlay.stage-overlay .end-col strong{font-size:13px;margin:0 0 3px}.overlay.stage-overlay .end-col p{font-size:11px;line-height:1.5}
+ .overlay.stage-overlay .panel>.actions{margin-top:7px}
+ .overlay.stage-overlay .button{font-size:12px;padding:9px}
+ .hud{left:9px;right:9px;top:8px}.hud-chip{padding:5px 7px}.hint{display:none}
+ .overlay:not(.stage-overlay) .panel{max-height:100%;overflow:auto}
+}
+
+
+/* Original collection images appear once loaded; pixel-art fallback prevents empty frames. */
+.photo-stage{position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;overflow:hidden}
+.photo-stage .artifact-preview{display:block;width:90%;height:auto;max-height:70%;object-fit:contain;image-rendering:pixelated}
+.photo-stage .preview-label{font-size:10px;color:#afc4d1;text-align:center}
+.photo-stage .museum-photo{display:none}
+.photo-stage.photo-loaded .artifact-preview,.photo-stage.photo-loaded .preview-label{display:none}
+.photo-stage.photo-loaded .museum-photo{display:block}
+.photo-stage .photo-error{padding:2px;font-size:11px}
+.photo-stage .preview-label[hidden]{display:none}
+</style>
+</head>
+<body>
+<main class="site">
+<header class="top"><div class="brand"><span class="brandmark">＄</span><span>貨幣時空博物館</span></div><div class="top-right"><span class="tag">●</span> SINGLE-PLAYER EXPERIENCE<br>1893 — 2026 · 臺灣</div></header>
+<section class="frame" aria-label="像素風博物館遊戲">
+<div class="game" id="game"><canvas id="world" width="480" height="270" aria-label="第三人稱像素角色與博物館場景"></canvas><div class="screen-lines"></div><button class="fullscreen-button" id="fullscreenButton" type="button" title="瀏覽器全螢幕切換">⛶ 全螢幕</button>
+<div class="hud" id="hud"><div class="hud-chip"><strong id="levelName">選擇角色</strong><br><small id="levelSubtitle">CHARACTER SELECT</small></div><div class="hud-chip" style="text-align:right"><span id="progressText">展覽進度 0 / 5</span><div class="progress"><div class="fill" id="progressFill"></div></div></div></div>
+<div class="hint" id="hint">選擇人物開始探索</div><div class="overlay" id="overlay" role="dialog" aria-modal="true"></div></div></section>
+<div class="controls" aria-label="觸控操作"><button data-key="a" aria-label="向左">◀</button><button data-key="w" aria-label="向上">▲</button><button data-key="s" aria-label="向下">▼</button><button data-key="d" aria-label="向右">▶</button><button data-action="continue" class="wide" aria-label="繼續">F｜繼續</button></div>
+<div class="bottom"><div class="legend">⌨ 電腦：WASD / 方向鍵前進 · F 查看展品／繼續 · 1–3 作答 · R 死亡重來<br>✦ 手機：可使用畫面下方方向鍵與觸控選項</div><div class="status">◆ 3 隻角色 · 5 件館藏 · 5 道雞蛋挑戰</div></div>
+
+</main>
+<script>
+(() => {
+'use strict';
+const canvas = document.getElementById('world');
+const ctx = canvas.getContext('2d');
+ctx.imageSmoothingEnabled = false;
+const $ = s=>document.querySelector(s);
+const overlay=$('#overlay'),hint=$('#hint');
+const W=480,H=270;
+const colors={gold:'#f4cf83',cream:'#fbeccc',floor:'#384861',dark:'#111827'};
+const chars=[
+ {name:'公雞',role:'勇敢的探險隊長',body:'#fff1dc',wing:'#dbc6a3',shade:'#9e8b70',comb:'#e95852',leg:'#e9a34d',tail:'#5d9eae',size:1.14,type:'rooster'},
+ {name:'母雞',role:'細心的文物研究員',body:'#c98859',wing:'#e4aa78',shade:'#815639',comb:'#dc5c54',leg:'#e4a252',tail:'#8e6045',size:1.08,type:'hen'},
+ {name:'小雞',role:'好奇的時空旅行者',body:'#ffdf60',wing:'#fff19d',shade:'#d6ae48',comb:'#ffbe50',leg:'#e7a14d',tail:'#efb652',size:.88,type:'chick'},
+];
+const exhibits=[
+ {name:'臺灣製造光緒元寶庫平七分二釐',short:'光緒元寶七分二釐',era:'清末臺灣',period:'1893–1894 年',compare:'1893–1894 年',museum:'國立歷史博物館',code:'25894',type:'銀幣',image:'https://collections.culture.tw/nmh_collectionsweb/Image?FileName=K6K85RMAK7MFMPMWMIK2KMM1MXMZMZMKKY5T&Size=640',license:'官方標示 CC BY，請依規定標示來源',social:'清末臺灣在劉銘傳推動建省、鐵路與財政制度改革的背景下，逐漸接觸近代化造幣技術。舊式銀兩、銀元與銅錢的並行，也使貨幣交易制度相當複雜。',detail:'這枚銀幣中央為「光緒元寶」，外圈標示「臺灣製造」和「庫平七分二釐」，並有花飾及齒邊。背面原應有蟠龍與英文標記，但館藏實物磨損明顯；1966 年由臺灣銀行撥交入藏。',meaning:'它象徵臺灣清領末年從傳統貨幣向機製幣轉型，是觀察地方治理與近代化的重要物證。',link:'https://collections.culture.tw/nmh_collectionsweb/Collection?GID=MZMQMEMAMNM2'},
+ {name:'日治時期株式會社臺灣銀行金壹圓券',short:'臺灣銀行金壹圓券',era:'日治時期',period:'日治時期',compare:'1912 年（比較情境）',museum:'國立臺灣歷史博物館',code:'2017.025.0084',type:'紙鈔',image:'https://collections.nmth.gov.tw/GetCollectionWatermarkPic.ashx?picurl=E6+ulbPIZQgsjngi4%2FinSLoSdFVnl3FY3hFK13DookVPGuJNGlb+3tHQfVz1HEUOia0tML8JSaf0QWkXHQRPJdV138l%2FmUwR&width=0',license:'館藏影像公開瀏覽，對外使用請先確認館方授權',social:'1895 年臺灣進入日本統治時期，金融與稅收制度逐漸改變。1899 年臺灣銀行開業，銀行券的發行與殖民地金融秩序、商業貿易及商品輸出緊密相關。',detail:'金壹圓券由株式會社臺灣銀行發行，委託大日本帝國政府印刷局製造。正面有鳳凰、雙龍及「金壹圓」「臺灣銀行」等字樣；背面含「ONE YEN in Gold」兌換承諾，反映當時制度設計。',meaning:'一張紙鈔呈現殖民地金融管理、紙幣信用與日常交易方式的變化。題目的 1912 年是購買力比較年代，不等於已確認這張館藏於 1912 年印製。',link:'https://collections.nmth.gov.tw/CollectionContent.aspx?a=132&rno=2017.025.0084'},
+ {name:'臺幣壹萬圓鈔券（舊臺幣）',short:'舊臺幣壹萬圓券',era:'戰後初期',period:'1948 年發行',compare:'1949 年 6 月幣改前',museum:'國立歷史博物館',code:'10317',type:'紙鈔',image:'https://collections.culture.tw/nmh_collectionsweb/Image?FileName=K6K85RMAK7MFMPMWMIK2KMMRM5M6MBM5KY5T&Size=640',license:'官方標示 CC BY，請依規定標示來源',social:'第二次世界大戰後臺灣經歷政權交接、物資供需失衡與嚴重通貨膨脹。物價快速上升，使民眾面臨薪資追不上日常支出的困境，鈔票面額也不斷變大。',detail:'館藏為 1948 年臺灣銀行發行的一萬圓舊臺幣，正面深綠色，以孫中山肖像、臺灣銀行總行、臺灣地圖及稻穗甘蔗裝飾；背面為藍橘色與海戰圖案。1967 年由夏德儀捐贈。',meaning:'面額「壹萬圓」不代表有高購買力；它反而見證貨幣貶值與民眾對物價的不安。遊戲採用 1949 年 6 月改革之前作比較，並非鈔券的發行日期。',link:'https://collections.culture.tw/nmh_collectionsweb/Collection?GID=MRMHM4M1M8M2'},
+ {name:'新臺幣壹圓鈔券',short:'新臺幣壹圓券',era:'新臺幣誕生',period:'1949 年印製／1952 年發行',compare:'1949 年 6 月（幣改情境）',museum:'國立歷史博物館',code:'10347',type:'紙鈔',image:'https://collections.culture.tw/ShowGalImage.aspx?FROM=5YKK57&GDMID=0x02000000dc5e0e35a33662c26259e7762c5c268f3a4f2750fa40923ded5e037a0e6591a8&IMG=5MK851MI0UMAM1MC5GKAMZMLM4MIKN5PM2MGMCMWMBKWKGM7MIMP0A5RKAK6MCMZMRMEKYKKK6555TMMMFM5MWMGMJ5RK50VKAMWMRK80B530V0VMWMRMGMEM2MEMM0WM7MSMHMYKKM1M85VMFKN06MEMGMD04MWMA04MD0RM6M10EM4MR0RM4&SYSUID=14&TEXT=K7KG575Y&WM=0x02000000211bd935892e78a8dc91108acb5d20141c6cb71488b25094396fba35307c874f56fa29dffb8f05ae9073f70c070bc5c5',license:'官方標示 CC BY，請依規定標示來源',social:'1949 年 6 月 15 日新臺幣正式發行，政府透過幣制改革處理舊臺幣的劇烈貶值，並訂定 40,000 舊臺幣兌換 1 新臺幣的比率。新幣制也影響人民對貨幣與物價的期待。',detail:'這件壹圓館藏是直式「臺一版」，正面為深紫色、孫中山肖像與「壹圓」面額，背面為臺灣銀行總行與臺灣地圖。官方資料標示 1949 年印製、1952 年發行；原始描述中另有「壹角」筆誤，應以藏品標題及券面為準。',meaning:'它象徵貨幣制度重建。注意：遊戲以 1949 年 6 月新臺幣幣改時的幣值作題，與這件館藏於 1952 年發行的日期不同。',link:'https://tcmb.culture.tw/zh-tw/detail?id=14000113400&indexCode=MOCCOLLECTIONS'},
+ {name:'新臺幣發行五十週年紀念性塑膠鈔券',short:'新臺幣 50 元紀念鈔',era:'現代臺灣',period:'1999 年發行',compare:'2026 年',museum:'國立臺灣歷史博物館',code:'2021.019.0019',type:'50 元塑膠紀念鈔',image:'https://collections.nmth.gov.tw/GetCollectionWatermarkPic.ashx?picurl=E6+ulbPIZQgsjngi4%2FinSLoSdFVnl3FY3hFK13DookVPGuJNGlb+3tEBcCbUr%2FH%2FAYhFbngQ1xDCpcoMc+1Bg675gS6QNU2A&width=0',license:'館藏影像公開瀏覽，對外使用請先確認館方授權',social:'新臺幣於 1949 年問世，1999 年屆滿五十週年。臺灣在這段期間歷經工業化、經濟成長、交通建設及金融科技進展，貨幣也成了紀念歷史的媒介。',detail:'這張面額 50 元的紀念性塑膠鈔券由中央印製廠於 1999 年印製，配有紀念封套。票面以歷代鈔券、橋梁、鐵路、通訊網路及中央銀行大樓為主題，並具有多項防偽設計。這是塑膠鈔，不是 50 元硬幣。',meaning:'鈔票除了支付功能，也能保存時代記憶。遊戲以 2026 年 50 元的生活購買力作比較，不是 1999 年實際物價。',link:'https://collections.nmth.gov.tw/CollectionContent.aspx?RNO=2021.019.0019&a=132'}
+];
+const questions=[
+ {compare:'1893–1894 年',options:[3,30,100],correct:1,why:'依本次策展採用的估算基準，一枚七分二釐光緒元寶約可買 30 顆雞蛋。'},
+ {compare:'1912 年',options:[5,50,100],correct:1,why:'依本次策展採用的估算基準，一張金壹圓券約可買 50 顆雞蛋。'},
+ {compare:'1949 年 6 月幣改前',options:[1,10,100],correct:0,why:'依本次策展採用的估算基準，一張舊臺幣壹萬圓券約可買 1 顆雞蛋；此時深受通膨影響。'},
+ {compare:'1949 年 6 月',options:[5,50,100],correct:0,why:'依本次策展採用的估算基準，新臺幣 1 元約可買 5 顆雞蛋。'},
+ {compare:'2026 年',options:[10,100,500],correct:0,why:'依本次策展採用的估算基準，新臺幣 50 元約可買 10 顆雞蛋。'}
+];
+const milestones=[230,525,820,1115,1410]; const corridorEnd=1640;
+const game={mode:'select',selected:0,x:240,y:238,walk:0,prog:0,seen:Array(5).fill(false),openExhibit:-1,quiz:0,quizWins:0,death:0,ts:0};
+const held=new Set();let sound=null;
+function beep(freq=500,duration=.09,type='square',volume=.035){try{sound ??= new (window.AudioContext||window.webkitAudioContext)();const osc=sound.createOscillator(),gain=sound.createGain();osc.type=type;osc.frequency.value=freq;gain.gain.value=volume;osc.connect(gain);gain.connect(sound.destination);osc.start();gain.gain.exponentialRampToValueAtTime(.001,sound.currentTime+duration);osc.stop(sound.currentTime+duration)}catch(_){}}
+function box(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}
+function border(x,y,w,h,fill,stroke='#647791',th=3){box(x,y,w,h,stroke);box(x+th,y+th,w-2*th,h-2*th,fill)}
+function label(text,x,y,size=11,color='#fff4d7',align='center'){ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline='middle';ctx.font=`bold ${size}px Consolas, "Noto Sans TC", sans-serif`;ctx.fillText(text,x,y)}
+function drawChicken(g,c,x,y,scale=1,dir='up',walk=0,dead=false){
+ g.save();g.translate(Math.round(x),Math.round(y));g.scale(scale*c.size,scale*c.size);
+ if(dead){g.rotate(Math.PI*.48);g.globalAlpha=.73}
+ const b=(x,y,w,h,col)=>{g.fillStyle=col;g.fillRect(x,y,w,h)};
+ const step=Math.sin(walk*11)*2;
+ b(-7,2+step,4,10,c.leg);b(4,2-step,4,10,c.leg);
+ b(-9,10+step,7,3,c.leg);b(3,10-step,8,3,c.leg);
+ if(c.type==='rooster'){b(-16,-18,7,4,c.tail);b(-20,-24,8,6,'#79b2c3');b(10,-18,7,6,c.tail);b(13,-25,6,8,'#3e7898')}
+ else if(c.type==='hen'){b(10,-13,8,6,c.tail);b(-15,-13,7,5,c.tail)}
+ else b(8,-13,6,6,c.tail);
+ b(-12,-14,24,20,c.shade);b(-10,-16,20,20,c.body);b(-14,-8,7,13,c.wing);b(7,-8,7,13,c.wing);
+ b(-9,-23,18,14,c.shade);b(-8,-25,16,15,c.body);
+ if(c.type==='rooster'){b(-6,-32,6,7,c.comb);b(0,-35,6,10,c.comb);b(6,-31,4,6,c.comb)}
+ else if(c.type==='hen'){b(-3,-29,6,6,c.comb);b(3,-27,5,4,c.comb)}
+ else{b(-2,-27,4,3,'#ffaf41')}
+ if(dir==='down'||dir==='left'||dir==='right'){
+ b(-6,-20,3,3,'#242938');b(4,-20,3,3,'#242938');b(-2,-15,5,4,'#eea545');
+ if(c.type!=='chick')b(3,-11,4,5,c.comb);
+ }else{b(-5,-19,10,6,c.wing);b(-2,-24,4,5,c.shade)}
+ g.restore();
+}
+function drawChar(c,x,y,scale=1,dir='up',walk=0,dead=false){drawChicken(ctx,c,x,y,scale,dir,walk,dead)}
+function drawCoin(x,y,r=15){box(x-r-2,y-r-2,r*2+4,r*2+4,'#927044');box(x-r,y-r,r*2,r*2,'#d3aa68');box(x-r+3,y-r+3,r*2-6,r*2-6,'#eed398');box(x-3,y-4,6,8,'#b68645');box(x-11,y-1,7,2,'#ae8047');box(x+4,y-1,7,2,'#ae8047')}
+function drawBanknote(x,y,w,h,style=0){let palettes=[['#efe0a2','#96793f'],['#e2cbaa','#8b6c4a'],['#b4e2be','#4c826f'],['#d0c3de','#7f649b'],['#d4e3ae','#687f63']];const p=palettes[style];border(x,y,w,h,p[0],p[1],3);border(x+5,y+5,w-10,h-10,p[0],p[1],1);box(x+w/2-4,y+6,8,h-12,p[1]);box(x+w/2-2,y+8,4,h-16,p[0]);box(x+9,y+10,14,5,p[1]);box(x+w-23,y+10,14,5,p[1]);box(x+9,y+h-15,14,5,p[1]);box(x+w-23,y+h-15,14,5,p[1])}
+function artifactCanvas(canvasEl,i){if(!canvasEl)return;const p=canvasEl.getContext('2d');canvasEl.width=176;canvasEl.height=96;p.imageSmoothingEnabled=false;const save=ctx; // separate rendering with local primitives
+ const b=(x,y,w,h,c)=>{p.fillStyle=c;p.fillRect(x,y,w,h)};b(0,0,176,96,'#1b2b40');for(let q=0;q<176;q+=12)b(q,0,2,96,'#25384b');b(9,9,158,78,'#34455c');b(12,12,152,72,'#111e30');
+ if(i===0){b(63,7,50,78,'#ad8348');b(66,10,44,72,'#e6be75');b(71,15,34,62,'#9a763f');b(74,18,28,56,'#eed397');p.fillStyle='#7b582f';p.textAlign='center';p.font='bold 11px serif';p.fillText('光 緒',88,41);p.fillText('元 寶',88,56)}
+ else{const pal=[null,['#e6d3ab','#735836'],['#b5e3c9','#4d7c64'],['#d5c9e8','#74578d'],['#e3deaf','#677a57']][i];b(25,23,126,53,pal[1]);b(28,26,120,47,pal[0]);b(34,32,108,35,pal[1]);b(37,35,102,29,pal[0]);b(62,33,52,33,pal[1]);b(65,36,46,27,pal[0]);p.fillStyle=pal[1];p.font='bold 14px monospace';p.textAlign='center';p.fillText(['','1','10000','1','50'][i],88,55)}
+}
+function sky(){box(0,0,480,270,'#1c2c49');for(let i=0;i<11;i++){const y=i*11;box(0,y,480,11,i%2?'#263c59':'#243653')};for(let i=0;i<30;i++){const x=((i*127+41)%480),y=(i*71+17)%96;box(x,y,2,2,'#e1d3aa')}}
+function drawOutside(time){sky();box(0,100,480,170,'#334e60');box(0,147,480,123,'#556478');for(let i=0;i<480;i+=20){box(i+2,151,17,3,'#788098');box(i,193,19,3,'#4b566b');box(i+4,228,18,3,'#4b566b')}box(152,162,176,108,'#9e9a84');for(let y=168;y<270;y+=22){box(153,y,174,2,'#c5b89a');box(240-(y-160)*.32,y,2,3,'#5f6172')};
+ border(100,62,280,113,'#b3a080','#524f5d',5);box(114,43,252,31,'#637389');box(124,36,232,15,'#ddc38e');box(135,28,210,13,'#8f7695');box(148,15,184,21,'#e5cc91');label('CURRENCY MUSEUM',240,26,12,'#293a56');box(112,76,256,95,'#b1a08a');
+ for(let j=0;j<5;j++){let x=123+j*52;box(x,76,12,96,'#eee0af');box(x+3,76,6,96,'#baa981');box(x-4,73,20,8,'#e8cc93');box(x-4,163,20,8,'#dfbe84')}
+ border(194,101,93,71,'#192842','#665e58',4);box(202,108,77,60,'#263d58');box(238,111,3,55,'#e2c386');box(221,138,4,5,'#f4d183');box(256,138,4,5,'#f4d183');box(199,98,84,7,'#cda76e');
+ for(let t=0;t<2;t++){const x=t?383:64;box(x-16,124,32,45,'#52674f');box(x-10,111,20,43,'#50745c');box(x-4,106,8,62,'#769568');box(x-6,164,12,16,'#b9ab8b');box(x-16,177,32,5,'#6b6672')}
+ for(let z=0;z<5;z++){box(180-z*8,167+z*8,120+z*16,4,'#e0c79b')}
+ box(game.x-9,game.y+9,18,5,'#222a3b88');drawChar(chars[game.selected],game.x,game.y,1.25,held.has('s')?'down':'up',game.walk)
+}
+function drawInterior(){box(0,0,480,270,'#1b283e');box(67,0,346,270,'#34445a');for(let y=0;y<270;y+=30){box(76,y,328,2,'#586681');for(let x=76;x<404;x+=35)box(x,y+2,2,27,'#45536b')}box(68,0,345,50,'#1b2538');box(82,32,317,14,'#7d6470');box(92,42,297,6,'#bd9871');border(115,69,250,112,'#202d46','#b49362',5);border(130,85,220,76,'#35475e','#6a7b94',3);drawCoin(190,120,17);drawBanknote(226,102,75,36,3);box(67,178,346,92,'#33445b');for(let x=74;x<410;x+=35){box(x,185,2,85,'#56657b')};box(230,190,20,30,'#b79f76');drawChar(chars[game.selected],240,215,1.8,'up',0)}
+function displayCase(i,y){
+ if(y < -60 || y > 320)return;
+ const right=i%2===1,x=right?353:58,near=nearExhibitIndex()===i;
+ border(x-3,y-32,72,73,'#1c293d',near?'#fff0a1':'#b49b6d',4);
+ border(x+4,y-24,58,49,'#354d65','#718aa3',2);
+ // Pixel icons on the wall; authentic photographs appear inside the exhibit popup.
+ if(i===0)drawCoin(x+33,y+1,16);else drawBanknote(x+9,y-9,49,28,i);
+ box(x+8,y+28,51,9,'#e7cf9f');label('0'+(i+1)+'  '+['清末','日治','戰後','新幣','現代'][i],x+33,y+32,7,'#26344c');
+ if(near){border(x+9,y-51,49,16,'#fde0a4','#6b4f3f',2);label('F 觀看',x+33,y-43,9,'#17243a')}
+}
+function nearExhibitIndex(){for(let i=0;i<milestones.length;i++){if(!game.seen[i]&&Math.abs(game.prog-milestones[i])<=8)return i}return -1}
+function hallPolygon(points,fill){ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)ctx.lineTo(points[i][0],points[i][1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill()}
+function hallStroke(x,y,x2,y2,color,width=2){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x2,y2);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
+function perspective(depth){const d=Math.max(0,depth),s=1/(1+d/238),cx=240-(game.x-240)*.2;return {s,cx,l:cx-240*s,r:cx+240*s,f:99+171*s,c:99-171*s}}
+let wallArt=[];
+function perspectiveExhibit(i){
+ const distance=milestones[i]-game.prog;
+ if(distance < -160 || distance>1750)return;
+ // At the interaction spot the artwork sits clearly on the adjacent wall,
+ // while distant works become smaller and converge toward the vanishing point.
+ const s=1/(1+Math.max(0,distance)/255),side=i%2?1:-1,cx=240-(game.x-240)*.2;
+ const x=cx+side*188*s, y=99+20*s, w=82*s,h=90*s;
+ if(!wallArt[i]){const sprite=document.createElement('canvas');artifactCanvas(sprite,i);wallArt[i]=sprite}
+ ctx.save();ctx.translate(Math.round(x),Math.round(y));
+ border(-w/2-5*s,-h/2-5*s,w+10*s,h+10*s,'#251c22','#836d4f',Math.max(1,Math.round(4*s)));
+ border(-w/2,-h/2,w,h,'#122336','#d8b77b',Math.max(1,Math.round(3*s)));
+ ctx.drawImage(wallArt[i],Math.round(-w/2+5*s),Math.round(-h/2+5*s),Math.round(w-10*s),Math.round(h-21*s));
+ const band=Math.max(6,Math.round(12*s));box(-w/2+1,h/2-band,w-2,band,'#dec68b');
+ if(s>.18){label('0'+(i+1)+' '+['清末','日治','戰後','新幣','現代'][i],0,h/2-band/2,Math.max(7,Math.round(9*s)),'#243246')}
+ if(nearExhibitIndex()===i){ctx.strokeStyle='#fff2aa';ctx.lineWidth=3;ctx.strokeRect(-w/2-7*s,-h/2-7*s,w+14*s,h+14*s);border(-w/2-3*s,-h/2-26*s,w+6*s,21*s,'#f3d58d','#33445f',2);label('按 F 展開',0,-h/2-16*s,Math.max(9,12*s),'#17253b')}
+ ctx.restore();
+}
+function drawHall(){
+ const v=240-(game.x-240)*.2;
+ // Rear-camera, one-point perspective. Vanishing point stays ahead; chicken always
+ // appears in the foreground, with back facing us, as the world advances past it.
+ box(0,0,480,270,'#101a2b');
+ hallPolygon([[0,0],[480,0],[v,99]],'#212b43');
+ hallPolygon([[0,0],[v,99],[0,270]],'#35435d');
+ hallPolygon([[480,0],[v,99],[480,270]],'#2e3e58');
+ hallPolygon([[0,270],[480,270],[v,99]],'#586379');
+ hallPolygon([[0,0],[15,0],[v,99],[0,245]],'#27354e');
+ hallPolygon([[480,0],[465,0],[v,99],[480,245]],'#25334b');
+ // Base lines trace the corridor depth.
+ hallStroke(0,270,v,99,'#dfb57c',4);hallStroke(480,270,v,99,'#dfb57c',4);
+ hallStroke(0,0,v,99,'#68778c',3);hallStroke(480,0,v,99,'#68778c',3);
+ // floor tile grout lines, fixed in world coordinates rather than painted in screen space
+ const tile=85,start=Math.floor(game.prog/tile)*tile;
+ for(let z=start;z<game.prog+2100;z+=tile){
+   const d=z-game.prog;if(d<0)continue;
+   const p=perspective(d);hallStroke(p.l,p.f,p.r,p.f,'#83889a',Math.max(.6,3*p.s));
+   for(let t=-2;t<=2;t++){const xx=p.cx+(t/3)*240*p.s;hallStroke(xx,p.f,v,99,'#6c788c',Math.max(.5,1.2*p.s));}
+ }
+ // Vertical support strips and ceiling lamps recede continuously as player walks.
+ const support=240,startSupport=Math.floor(game.prog/support)*support;
+ for(let z=startSupport;z<game.prog+1950;z+=support){
+   const p=perspective(z-game.prog);if(z<game.prog)continue;
+   const wid=Math.max(.7,8*p.s);
+   hallStroke(p.l,p.c,p.l,p.f,'#b69b75',wid);hallStroke(p.r,p.c,p.r,p.f,'#b69b75',wid);
+   hallStroke(p.cx-26*p.s,p.c+13*p.s,p.cx+26*p.s,p.c+13*p.s,'#e3cd9a',Math.max(1,8*p.s));
+ }
+ // Frame the five works on the side walls, rendered far-to-near for correct layering.
+ [4,3,2,1,0].forEach(perspectiveExhibit);
+ const doorDistance=corridorEnd-game.prog;
+ if(doorDistance>-10){const p=perspective(doorDistance),w=128*p.s,h=160*p.s;
+   border(p.cx-w/2,99-h/2,w,h,'#19273b','#cca972',Math.max(1,Math.round(5*p.s)));
+   border(p.cx-w/2+8*p.s,99-h/2+8*p.s,w-16*p.s,h-16*p.s,'#263e59','#8294a4',Math.max(1,Math.round(3*p.s)));
+   if(p.s>.23)label('→ 第二關',p.cx,99,Math.max(8,Math.round(14*p.s)),'#f9d6a2');
+ }
+ // The camera follows behind the playable character. Do not move sprite up the screen.
+ box(211,242,58,8,'#10182c99');drawChar(chars[game.selected],240,222+Math.sin(game.walk*11)*1.2,2.15,'up',game.walk);
+
+}
+function drawMarket(time){let i=game.quiz;let palettes=[['#324b5c','#526f64','#bf8e68'],['#313d62','#797d73','#dba76a'],['#42405c','#6b5862','#c6a27a'],['#344e5b','#698270','#e5b57c'],['#28415d','#567b8e','#c8a0aa']][i]||['#324b5c','#526f64','#bf8e68'];box(0,0,480,270,palettes[0]);for(let j=0;j<9;j++)box(0,j*15,480,2,'#81909a16');box(0,158,480,112,palettes[1]);for(let y=160;y<270;y+=27){box(0,y,480,3,'#243b49');for(let x=y%2?5:27;x<480;x+=42)box(x,y+3,3,25,'#455e67')}
+ for(let n=0;n<3;n++){let x=26+n*156;box(x+5,86,122,84,'#4a4b58');box(x,79,132,19,palettes[2]);for(let z=0;z<6;z++)box(x+z*22,79,12,21,z%2?'#ead49f':'#8f5258');box(x+9,100,114,65,'#6d6b6d');box(x+12,103,108,41,'#3a4656');for(let b=0;b<3;b++){if(i%2===0)drawCoin(x+31+b*25,123,8);else drawBanknote(x+20+b*24,115,22,13,(i+1)%5)}box(x+5,146,122,22,'#987b64')}
+ box(225,209,30,9,'#131d30bb');drawChar(chars[game.selected],240,197,1.7,'down',game.walk,game.mode==='dead');
+ for(let j=0;j<5;j++){const x=139+j*45;box(x,19,29,28,j===i?'#f6d18a':'#263d54');label(String(j+1),x+14,33,12,j===i?'#202b43':'#c9d5df')}
+}
+function setHUD(){
+ const modes={select:['選擇角色','CHOOSE YOUR CHICKEN'],outside:['博物館入口','WALK INTO THE MUSEUM'],title:['展覽序章','PRESS F TO CONTINUE'],hall:['第一關 · 歷史長廊','CHAPTER 01 / GALLERY'],chapter2Intro:['第二關 · 雞蛋購買力','PRESS F TO START'],market:['第二關 · 雞蛋購買力','CHAPTER 02 / EGG QUIZ'],marketSuccess:['答對了！','CHALLENGE CLEARED'],dead:['GAME OVER','RESTART CHAPTER 02'],finish:['策展理念','EXHIBITION COMPLETE']};
+ const h=modes[game.mode]||modes.select;
+ $('#levelName').textContent=h[0];$('#levelSubtitle').textContent=h[1];
+ let score=['market','marketSuccess','dead','chapter2Intro'].includes(game.mode)?game.quizWins:game.mode==='finish'?5:game.seen.filter(Boolean).length;
+ $('#progressText').textContent=['market','marketSuccess','dead','chapter2Intro'].includes(game.mode)?'答對題數 '+score+' / 5':'展品進度 '+score+' / 5';$('#progressFill').style.width= Math.min(100,score/5*100)+'%';
+ hint.textContent=game.mode==='outside'?'WASD / 方向鍵：朝博物館大門前進':game.mode==='hall'?(nearExhibitIndex()>=0?'按 F 查看牆上的文物':'W / ↑ 向前走，靠近牆上展品按 F'):game.mode==='market'?'1／2／3 作答 · 答錯從第 1 題重來':game.mode==='select'?'選擇公雞、母雞或小雞':game.mode==='dead'?'按 R 重新挑戰第二關':'按 F 繼續';
+}
+function show(html,stage=''){overlay.classList.remove('hidden');overlay.classList.toggle('stage-overlay',Boolean(stage));if(stage)overlay.dataset.stage=stage;else delete overlay.dataset.stage;overlay.innerHTML=`<article class="panel">${html}</article>`;requestAnimationFrame(()=>{const first=overlay.querySelector('button');if(first)first.focus({preventScroll:true})})}
+function hide(){overlay.classList.add('hidden');overlay.classList.remove('stage-overlay');delete overlay.dataset.stage;overlay.innerHTML=''}
+function chooseChar(i){game.selected=i;renderSelect()}
+function renderSelect(){game.mode='select';setHUD();show(`<div class="eyebrow">CHOOSE YOUR CHARACTER / 角色選擇</div><h1 class="display">選一隻<span class="accent">小雞夥伴</span></h1><p class="intro">公雞、母雞、小雞，誰要帶你穿越臺灣貨幣的五個時代？</p><div class="avatars">${chars.map((c,i)=>`<button class="avatar ${i===game.selected?'selected':''}" data-char="${i}"><canvas class="avatar-preview" width="74" height="85" data-preview="${i}"></canvas><strong>${c.name}</strong><span>${c.role}</span></button>`).join('')}</div><div class="actions"><button class="button" data-action="start">開始冒險 ▶</button><span class="secondary">1–3 選角色 · Enter 開始</span></div>`);
+ overlay.querySelectorAll('canvas[data-preview]').forEach(cv=>{const i=Number(cv.dataset.preview),p=cv.getContext('2d');p.imageSmoothingEnabled=false;p.fillStyle='#293a56';p.fillRect(0,0,74,85);for(let j=0;j<7;j++){p.fillStyle=j%2?'#354964':'#2a3d56';p.fillRect(0,j*12,74,2)};p.fillStyle='#101726';p.fillRect(13,74,48,5);drawChicken(p,chars[i],37,66,2,'down',0)});
+}
+function startGame(){game.x=240;game.y=238;game.walk=0;game.mode='outside';game.prog=0;game.openExhibit=-1;game.seen=Array(5).fill(false);game.quiz=0;game.quizWins=0;held.clear();hide();beep(670,.1);setHUD()}
+function showTitle(){game.mode='title';setHUD();show(`<div class="eyebrow">WELCOME TO THE MUSEUM / 序章</div><h1 class="display">《從清末到現代》<br><span class="accent">臺灣貨幣的演變</span></h1><p class="intro">在漫長的歷史長廊裡，觀察五件真實館藏，看見貨幣如何隨政權、經濟與人民生活而改變。</p><div class="actions"><button class="button" data-action="continue">按 F · 進入第一關 ▶</button><span class="secondary">CHAPTER 01 · 歷史長廊</span></div>`);beep(700,.15)}
+function imgHTML(e,cl='museum-photo'){const i=exhibits.indexOf(e);return `<div class="photo-stage"><canvas class="artifact-preview" width="176" height="96" data-artwork="${i}" aria-label="文物像素示意圖"></canvas><span class="preview-label">像素示意圖 · 官方照片載入中</span><img class="${cl}" src="${e.image}" alt="${e.name}：${e.museum}館藏實物照片" loading="eager"><div class="photo-error" hidden>官方照片無法載入；目前為像素示意圖。<br><a href="${e.link}" target="_blank" rel="noopener noreferrer">查看真正的官方館藏照片 ↗</a></div></div>`}
+function watchImages(){overlay.querySelectorAll('.photo-stage').forEach(stage=>{
+ const cv=stage.querySelector('.artifact-preview'),i=Number(cv.dataset.artwork),img=stage.querySelector('img'),cap=stage.querySelector('.preview-label');
+ artifactCanvas(cv,i);
+ const loaded=()=>{stage.classList.add('photo-loaded');cap.hidden=true};
+ const failed=()=>{img.hidden=true;cap.textContent='像素示意圖';const fallback=stage.querySelector('.photo-error');if(fallback)fallback.hidden=false};
+ img.addEventListener('load',loaded,{once:true});img.addEventListener('error',failed,{once:true});
+ if(img.complete){if(img.naturalWidth)loaded();else failed()}
+ })}
+function showExhibit(i){game.openExhibit=i;const e=exhibits[i];show(`<div class="eyebrow">EXHIBIT 0${i+1} / 05 · ${e.era}</div><h2 class="card-title">${e.name}</h2><div class="artifact-layout"><div class="artifact-box real-artifact">${imgHTML(e)}<small>典藏來源：${e.museum}</small></div><div class="artifact-text"><div class="meta">▣ ${e.period}　▣ ${e.type}<br>典藏：${e.museum}　編號 ${e.code}</div><div class="description"><strong>當時的社會背景</strong><p>${e.social}</p><strong>文物外觀與細節</strong><p>${e.detail}</p><strong>歷史意義</strong><p>${e.meaning}</p></div><div class="source">圖片及資料：${e.museum}<br><span>${e.license}</span><br><a href="${e.link}" target="_blank" rel="noopener noreferrer">開啟官方典藏紀錄與原始照片 ↗</a></div></div></div><div class="actions"><button class="button" data-action="continue">按 F · 繼續向前 ▶</button><span class="secondary">第 ${i+1} / 5 件館藏</span></div>`);watchImages();beep(720+i*60,.13)}
+function enterHall(){game.mode='hall';game.prog=0;game.x=240;game.openExhibit=-1;game.seen=Array(5).fill(false);hide();setHUD();beep(560,.12)}
+function showChapter2Intro(){game.mode='chapter2Intro';setHUD();show(`<div class="eyebrow">CHAPTER 02</div><h1 class="display">第二關<br><span class="accent">雞蛋購買力挑戰</span></h1><p class="intro">你已看完五件歷史貨幣。接下來請依序猜猜看：<strong>一枚或一張代表貨幣，在指定年代大約能買幾顆雞蛋？</strong></p><div class="chapter-rules"><div>🥚 <strong>五件展品 · 五道選擇題</strong></div><div>① 每題都有 <strong>3 個雞蛋數量選項</strong></div><div>② <strong>任一題答錯，角色死亡，從第二關第 1 題重來</strong></div></div><div class="actions"><button class="button" data-action="continue">按 F · 開始挑戰 ▶</button><span class="secondary">準備好了嗎？</span></div>`,'intro');beep(910,.16)}
+function enterMarket(){game.quiz=0;game.quizWins=0;showQuestion()}
+function showQuestion(){game.mode='market';const i=game.quiz,q=questions[i],e=exhibits[i];setHUD();show(`<div class="eyebrow">CHAPTER 02 · 第 ${i+1} / 5 小關</div><div class="big-number">比較年代：${q.compare}</div><h2 class="question">「${e.short}」在指定年代約能買幾顆雞蛋？</h2><div class="quiz-layout"><div class="quiz-photo">${imgHTML(e)}<small>典藏來源：${e.museum}</small></div><div class="quiz-body"><div class="egg-question">🥚 🥚 🥚 <span>猜猜看！</span></div><div class="choices">${q.options.map((v,j)=>`<button class="choice" data-answer="${j}"><em>${j+1}</em><span>${v} 顆雞蛋</span></button>`).join('')}</div></div></div><div class="note">可按鍵盤 1、2、3，或直接點選答案。</div>`,'quiz');watchImages()}
+function answerQuestion(chosen){if(game.mode!=='market'||overlay.classList.contains('hidden'))return;const q=questions[game.quiz];if(chosen===q.correct){game.quizWins=game.quiz+1;game.mode='marketSuccess';setHUD();beep(850,.11);show(`<div class="eyebrow">CORRECT ANSWER · ${game.quiz+1} / 5</div><h2 class="display" style="color:#92f1cd">答對了！ ✓</h2><p class="intro">${q.why}</p><div class="answer-eggs">🥚 <strong>${q.options[q.correct]} 顆雞蛋</strong></div><div class="actions"><button class="button" data-action="continue">按 F · ${game.quiz===4?'進入策展理念':'下一題'} ▶</button><span class="secondary">已成功通過 ${game.quizWins} / 5 題</span></div>`,'success')}else{game.mode='dead';game.death=performance.now();setHUD();beep(170,.22,'sawtooth',.055);show(`<div class="wrong"><div class="eyebrow" style="color:#ff99aa">YOU DIED · 時空挑戰失敗</div><div class="skull" aria-hidden="true">💀</div><h2 class="display" style="color:#ff9daa">GAME OVER</h2><p class="intro">正確答案是 <strong style="color:#ffe3a1">${q.options[q.correct]} 顆雞蛋</strong>。<br>${q.why}</p><p class="health">♥ → ×</p><div class="actions" style="justify-content:center"><button class="button" data-action="restartQuiz">按 R · 從第二關第 1 題重來</button></div><p class="secondary">第一關的文物不必重新參觀</p></div>`,'fail')} }
+function continueGame(){if(game.mode==='title'){enterHall();return}
+ if(game.mode==='hall'&&!overlay.classList.contains('hidden')){if(game.openExhibit>=0){game.seen[game.openExhibit]=true;game.openExhibit=-1}hide();setHUD();return}
+ if(game.mode==='hall'&&overlay.classList.contains('hidden')){let i=nearExhibitIndex();if(i>=0)showExhibit(i);return}
+ if(game.mode==='chapter2Intro'){enterMarket();return}
+ if(game.mode==='marketSuccess'){game.quiz++;if(game.quiz>=5)finish();else showQuestion();return}
+ if(game.mode==='dead'){restartQuiz();return}
+ if(game.mode==='finish'){startGame();return}
+}
+function restartQuiz(){game.quiz=0;game.quizWins=0;showQuestion()}
+function finish(){game.mode='finish';setHUD();beep(970,.15);show(`<div class="eyebrow">EXHIBITION COMPLETE / 策展理念</div><h2 class="display">恭喜通關！<br><span class="accent">貨幣不只是數字</span></h2><p class="intro">你跟著五件真實館藏，走過清末、日治、戰後、新臺幣改革及現代社會，也體驗了不同年代貨幣購買力的差異。</p><div class="end-cols"><div class="end-col"><strong>01｜貨幣與權力</strong><p>銀幣上的「臺灣製造」、日治銀行券的圖紋，都見證政權與貨幣發行制度的變遷。</p></div><div class="end-col"><strong>02｜貨幣與生活</strong><p>1940 年代末的通膨提醒我們：面額增加，未必代表生活更富裕；重要的是購買力。</p></div><div class="end-col"><strong>03｜貨幣與記憶</strong><p>新臺幣與紀念性塑膠鈔券，記錄臺灣經濟、社會和印製科技的變化。</p></div></div><div class="actions"><button class="button" data-action="restartAll">重新參觀 ↺</button><span class="secondary">感謝參觀《從清末到現代——臺灣貨幣的演變》</span></div>`,'finish')}
+function update(dt){
+ if(game.mode==='outside'&&overlay.classList.contains('hidden')){
+  let dx=(held.has('d')?1:0)-(held.has('a')?1:0),dy=(held.has('s')?1:0)-(held.has('w')?1:0);
+  if(dx||dy){const l=Math.hypot(dx,dy);game.x=Math.min(390,Math.max(88,game.x+dx/l*100*dt));game.y=Math.min(256,Math.max(155,game.y+dy/l*100*dt));game.walk+=dt*4}
+  if(game.y<=174&&game.x>=194&&game.x<=286)showTitle();
+ }else if(game.mode==='hall'&&overlay.classList.contains('hidden')){
+  let dx=(held.has('d')?1:0)-(held.has('a')?1:0),dy=(held.has('w')?1:0)-(held.has('s')?1:0);
+  if(dx||dy){game.x=Math.min(333,Math.max(147,game.x+dx*95*dt));
+   const next=game.seen.findIndex(v=>!v);const limit=next<0?corridorEnd:milestones[next];
+   game.prog=Math.min(limit,Math.max(0,game.prog+dy*215*dt));game.walk+=dt*5;}
+  const near=nearExhibitIndex();const h=near>=0?'按 F 查看牆上第 '+(near+1)+' 件展品':'W / ↑ 向前走 · 靠近展品按 F';if(hint.textContent!==h)hint.textContent=h;
+  if(game.prog>=corridorEnd&&game.seen.every(Boolean))showChapter2Intro();
+ }
+}
+function render(time){if(game.mode==='select'||game.mode==='outside')drawOutside(time);else if(game.mode==='title')drawInterior();else if(game.mode==='hall')drawHall();else drawMarket(time)}
+function frame(time){const dt=Math.min(.045,(time-game.ts)/1000||0);game.ts=time;update(dt);render(time);requestAnimationFrame(frame)}
+function doKey(k){
+ if(game.mode==='select'){if(['1','2','3'].includes(k))chooseChar(Number(k)-1);else if(k==='enter')startGame();return}
+ if(game.mode==='market'&&['1','2','3'].includes(k)){answerQuestion(Number(k)-1);return}
+ if(game.mode==='dead'&&k==='r'){restartQuiz();return}
+ if(k==='f'||k==='enter'){continueGame();return}
+ if(game.mode==='finish'&&k==='r'){startGame();return}
+}
+window.addEventListener('keydown',e=>{let k=e.key.toLowerCase();const keyMap={arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'};k=keyMap[k]||k;if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright',' ','f','r','1','2','3'].includes(k))e.preventDefault();held.add(k);if(!e.repeat)doKey(k)});
+window.addEventListener('keyup',e=>{let k=e.key.toLowerCase();k={arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'}[k]||k;held.delete(k)});
+window.addEventListener('blur',()=>held.clear());
+document.addEventListener('click',e=>{const c=e.target.closest('[data-char]');if(c){chooseChar(Number(c.dataset.char));beep(460,.07);return}const a=e.target.closest('[data-answer]');if(a){answerQuestion(Number(a.dataset.answer));return}const act=e.target.closest('[data-action]');if(act){let name=act.dataset.action;if(name==='start')startGame();if(name==='continue')continueGame();if(name==='restartQuiz')restartQuiz();if(name==='restartAll')startGame()}});
+const fullscreenBtn=document.getElementById('fullscreenButton');
+fullscreenBtn.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){/* browser may deny */}});
+document.addEventListener('fullscreenchange',()=>{fullscreenBtn.textContent=document.fullscreenElement?'⛶ 離開全螢幕':'⛶ 全螢幕'});
+document.querySelectorAll('button[data-key]').forEach(button=>{const k=button.dataset.key;const down=e=>{e.preventDefault();held.add(k);button.setPointerCapture?.(e.pointerId)};const up=e=>{e.preventDefault();held.delete(k)};button.addEventListener('pointerdown',down);button.addEventListener('pointerup',up);button.addEventListener('pointercancel',up);button.addEventListener('lostpointercapture',up)});
+renderSelect();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
