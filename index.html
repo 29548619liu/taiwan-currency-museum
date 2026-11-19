@@ -132,6 +132,28 @@ body:before{opacity:.06}
 .photo-stage.photo-loaded .museum-photo{display:block}
 .photo-stage .photo-error{padding:2px;font-size:11px}
 .photo-stage .preview-label[hidden]{display:none}
+
+/* V3.3: Two full-screen post-exhibition scenes */
+.overlay.stage-overlay[data-stage="about"]{
+ background:radial-gradient(circle at 83% 23%,#4c494288 0%,transparent 38%),linear-gradient(135deg,#0d1b2e 0%,#1c2e46 55%,#0a1426 100%);
+}
+.overlay.stage-overlay[data-stage="online-museum"]{
+ background:radial-gradient(circle at 18% 30%,#31575a77 0%,transparent 45%),linear-gradient(145deg,#0b172b 0%,#1d3247 55%,#081223 100%);
+}
+.credit-layout{max-width:980px;width:100%;display:flex;flex-direction:column;gap:clamp(12px,2.5vh,27px);margin-top:clamp(12px,2.8vh,28px)}
+.credit-school{font-size:clamp(21px,3.1vw,39px);color:#ffe1a2;font-weight:900;line-height:1.5;letter-spacing:.06em}
+.credit-course{font-size:clamp(16px,2.2vw,25px);color:#dce7f3;line-height:1.7}
+.credit-group{display:inline-block;width:max-content;background:#e9ca88;color:#19283c;font-size:clamp(16px,1.9vw,24px);font-weight:900;padding:10px 21px;border:3px solid #ffe4ab;box-shadow:6px 6px 0 #17233b}
+.credit-members{border-left:6px solid #e9c782;padding:10px 0 10px clamp(15px,2.5vw,29px);background:linear-gradient(90deg,#20334dba,transparent);line-height:1.8}
+.credit-members .members-label{display:block;color:#8ee3cc;font-size:clamp(13px,1.3vw,17px);font-weight:900;margin-bottom:8px}
+.credit-members .member-names{display:block;font-size:clamp(17px,2.3vw,30px);font-weight:800;letter-spacing:.05em;color:#fff2d6}
+.online-museum-quote{font-size:clamp(20px,3vw,40px);color:#fff0c9;line-height:1.85;font-weight:850;border-left:7px solid #f4ce84;padding:clamp(16px,3vw,36px);background:linear-gradient(110deg,#172e46e8,#19273b66);box-shadow:inset 0 0 0 2px #6a77907d;max-width:1100px;margin:clamp(20px,4vh,45px) 0 10px}
+@media(max-width:740px){
+ .credit-layout{gap:12px;margin-top:8px}.credit-school{font-size:clamp(18px,5vw,27px)}
+ .credit-course{font-size:17px}.credit-group{font-size:16px;padding:7px 13px}
+ .credit-members .member-names{font-size:clamp(16px,4.1vw,22px)}
+ .online-museum-quote{font-size:clamp(16px,4.2vw,23px);padding:14px;line-height:1.75;margin:14px 0 8px}
+}
 </style>
 </head>
 <body>
@@ -164,7 +186,7 @@ const exhibits=[
  {name:'臺灣製造光緒元寶庫平七分二釐',short:'光緒元寶七分二釐',era:'清末臺灣',period:'1893–1894 年',compare:'1893–1894 年',museum:'國立歷史博物館',code:'25894',type:'銀幣',image:'https://collections.culture.tw/nmh_collectionsweb/Image?FileName=K6K85RMAK7MFMPMWMIK2KMM1MXMZMZMKKY5T&Size=640',license:'官方標示 CC BY，請依規定標示來源',social:'清末臺灣在劉銘傳推動建省、鐵路與財政制度改革的背景下，逐漸接觸近代化造幣技術。舊式銀兩、銀元與銅錢的並行，也使貨幣交易制度相當複雜。',detail:'這枚銀幣中央為「光緒元寶」，外圈標示「臺灣製造」和「庫平七分二釐」，並有花飾及齒邊。背面原應有蟠龍與英文標記，但館藏實物磨損明顯；1966 年由臺灣銀行撥交入藏。',meaning:'它象徵臺灣清領末年從傳統貨幣向機製幣轉型，是觀察地方治理與近代化的重要物證。',link:'https://collections.culture.tw/nmh_collectionsweb/Collection?GID=MZMQMEMAMNM2'},
  {name:'日治時期株式會社臺灣銀行金壹圓券',short:'臺灣銀行金壹圓券',era:'日治時期',period:'日治時期',compare:'1912 年（比較情境）',museum:'國立臺灣歷史博物館',code:'2017.025.0084',type:'紙鈔',image:'https://collections.nmth.gov.tw/GetCollectionWatermarkPic.ashx?picurl=E6+ulbPIZQgsjngi4%2FinSLoSdFVnl3FY3hFK13DookVPGuJNGlb+3tHQfVz1HEUOia0tML8JSaf0QWkXHQRPJdV138l%2FmUwR&width=0',license:'館藏影像公開瀏覽，對外使用請先確認館方授權',social:'1895 年臺灣進入日本統治時期，金融與稅收制度逐漸改變。1899 年臺灣銀行開業，銀行券的發行與殖民地金融秩序、商業貿易及商品輸出緊密相關。',detail:'金壹圓券由株式會社臺灣銀行發行，委託大日本帝國政府印刷局製造。正面有鳳凰、雙龍及「金壹圓」「臺灣銀行」等字樣；背面含「ONE YEN in Gold」兌換承諾，反映當時制度設計。',meaning:'一張紙鈔呈現殖民地金融管理、紙幣信用與日常交易方式的變化。題目的 1912 年是購買力比較年代，不等於已確認這張館藏於 1912 年印製。',link:'https://collections.nmth.gov.tw/CollectionContent.aspx?a=132&rno=2017.025.0084'},
  {name:'臺幣壹萬圓鈔券（舊臺幣）',short:'舊臺幣壹萬圓券',era:'戰後初期',period:'1948 年發行',compare:'1949 年 6 月幣改前',museum:'國立歷史博物館',code:'10317',type:'紙鈔',image:'https://collections.culture.tw/nmh_collectionsweb/Image?FileName=K6K85RMAK7MFMPMWMIK2KMMRM5M6MBM5KY5T&Size=640',license:'官方標示 CC BY，請依規定標示來源',social:'第二次世界大戰後臺灣經歷政權交接、物資供需失衡與嚴重通貨膨脹。物價快速上升，使民眾面臨薪資追不上日常支出的困境，鈔票面額也不斷變大。',detail:'館藏為 1948 年臺灣銀行發行的一萬圓舊臺幣，正面深綠色，以孫中山肖像、臺灣銀行總行、臺灣地圖及稻穗甘蔗裝飾；背面為藍橘色與海戰圖案。1967 年由夏德儀捐贈。',meaning:'面額「壹萬圓」不代表有高購買力；它反而見證貨幣貶值與民眾對物價的不安。遊戲採用 1949 年 6 月改革之前作比較，並非鈔券的發行日期。',link:'https://collections.culture.tw/nmh_collectionsweb/Collection?GID=MRMHM4M1M8M2'},
- {name:'新臺幣壹圓鈔券',short:'新臺幣壹圓券',era:'新臺幣誕生',period:'1949 年印製／1952 年發行',compare:'1949 年 6 月（幣改情境）',museum:'國立歷史博物館',code:'10347',type:'紙鈔',image:'https://collections.culture.tw/ShowGalImage.aspx?FROM=5YKK57&GDMID=0x02000000dc5e0e35a33662c26259e7762c5c268f3a4f2750fa40923ded5e037a0e6591a8&IMG=5MK851MI0UMAM1MC5GKAMZMLM4MIKN5PM2MGMCMWMBKWKGM7MIMP0A5RKAK6MCMZMRMEKYKKK6555TMMMFM5MWMGMJ5RK50VKAMWMRK80B530V0VMWMRMGMEM2MEMM0WM7MSMHMYKKM1M85VMFKN06MEMGMD04MWMA04MD0RM6M10EM4MR0RM4&SYSUID=14&TEXT=K7KG575Y&WM=0x02000000211bd935892e78a8dc91108acb5d20141c6cb71488b25094396fba35307c874f56fa29dffb8f05ae9073f70c070bc5c5',license:'官方標示 CC BY，請依規定標示來源',social:'1949 年 6 月 15 日新臺幣正式發行，政府透過幣制改革處理舊臺幣的劇烈貶值，並訂定 40,000 舊臺幣兌換 1 新臺幣的比率。新幣制也影響人民對貨幣與物價的期待。',detail:'這件壹圓館藏是直式「臺一版」，正面為深紫色、孫中山肖像與「壹圓」面額，背面為臺灣銀行總行與臺灣地圖。官方資料標示本件於 1949 年印製、1952 年發行',meaning:'它象徵貨幣制度重建。注意：遊戲以 1949 年 6 月新臺幣幣改時的幣值作題，與這件館藏於 1952 年發行的日期不同。',link:'https://tcmb.culture.tw/zh-tw/detail?id=14000113400&indexCode=MOCCOLLECTIONS'},
+ {name:'新臺幣壹圓鈔券',short:'新臺幣壹圓券',era:'新臺幣誕生',period:'1949 年印製／1952 年發行',compare:'1949 年 6 月（幣改情境）',museum:'國立歷史博物館',code:'10347',type:'紙鈔',image:'https://collections.culture.tw/ShowGalImage.aspx?FROM=5YKK57&GDMID=0x02000000dc5e0e35a33662c26259e7762c5c268f3a4f2750fa40923ded5e037a0e6591a8&IMG=5MK851MI0UMAM1MC5GKAMZMLM4MIKN5PM2MGMCMWMBKWKGM7MIMP0A5RKAK6MCMZMRMEKYKKK6555TMMMFM5MWMGMJ5RK50VKAMWMRK80B530V0VMWMRMGMEM2MEMM0WM7MSMHMYKKM1M85VMFKN06MEMGMD04MWMA04MD0RM6M10EM4MR0RM4&SYSUID=14&TEXT=K7KG575Y&WM=0x02000000211bd935892e78a8dc91108acb5d20141c6cb71488b25094396fba35307c874f56fa29dffb8f05ae9073f70c070bc5c5',license:'官方標示 CC BY，請依規定標示來源',social:'1949 年 6 月 15 日新臺幣正式發行，政府透過幣制改革處理舊臺幣的劇烈貶值，並訂定 40,000 舊臺幣兌換 1 新臺幣的比率。新幣制也影響人民對貨幣與物價的期待。',detail:'這件壹圓館藏是直式「臺一版」，正面以深紫色為主要色調，印有孫中山肖像與「壹圓」面額；背面呈現臺灣銀行總行與臺灣地圖。依國家文化記憶庫收錄的典藏資料，本件標示於 1949 年印製、1952 年發行。',meaning:'它象徵貨幣制度重建。注意：遊戲以 1949 年 6 月新臺幣幣改時的幣值作題，與這件館藏於 1952 年發行的日期不同。',link:'https://tcmb.culture.tw/zh-tw/detail?id=14000113400&indexCode=MOCCOLLECTIONS'},
  {name:'新臺幣發行五十週年紀念性塑膠鈔券',short:'新臺幣 50 元紀念鈔',era:'現代臺灣',period:'1999 年發行',compare:'2026 年',museum:'國立臺灣歷史博物館',code:'2021.019.0019',type:'50 元塑膠紀念鈔',image:'https://collections.nmth.gov.tw/GetCollectionWatermarkPic.ashx?picurl=E6+ulbPIZQgsjngi4%2FinSLoSdFVnl3FY3hFK13DookVPGuJNGlb+3tEBcCbUr%2FH%2FAYhFbngQ1xDCpcoMc+1Bg675gS6QNU2A&width=0',license:'館藏影像公開瀏覽，對外使用請先確認館方授權',social:'新臺幣於 1949 年問世，1999 年屆滿五十週年。臺灣在這段期間歷經工業化、經濟成長、交通建設及金融科技進展，貨幣也成了紀念歷史的媒介。',detail:'這張面額 50 元的紀念性塑膠鈔券由中央印製廠於 1999 年印製，配有紀念封套。票面以歷代鈔券、橋梁、鐵路、通訊網路及中央銀行大樓為主題，並具有多項防偽設計。這是塑膠鈔，不是 50 元硬幣。',meaning:'鈔票除了支付功能，也能保存時代記憶。遊戲以 2026 年 50 元的生活購買力作比較，不是 1999 年實際物價。',link:'https://collections.nmth.gov.tw/CollectionContent.aspx?RNO=2021.019.0019&a=132'}
 ];
 const questions=[
@@ -299,11 +321,11 @@ function drawMarket(time){let i=game.quiz;let palettes=[['#324b5c','#526f64','#b
  for(let j=0;j<5;j++){const x=139+j*45;box(x,19,29,28,j===i?'#f6d18a':'#263d54');label(String(j+1),x+14,33,12,j===i?'#202b43':'#c9d5df')}
 }
 function setHUD(){
- const modes={select:['選擇角色','CHOOSE YOUR CHICKEN'],outside:['博物館入口','WALK INTO THE MUSEUM'],title:['展覽序章','PRESS F TO CONTINUE'],hall:['第一關 · 歷史長廊','CHAPTER 01 / GALLERY'],chapter2Intro:['第二關 · 雞蛋購買力','PRESS F TO START'],market:['第二關 · 雞蛋購買力','CHAPTER 02 / EGG QUIZ'],marketSuccess:['答對了！','CHALLENGE CLEARED'],dead:['GAME OVER','RESTART CHAPTER 02'],finish:['策展理念','EXHIBITION COMPLETE']};
+ const modes={select:['選擇角色','CHOOSE YOUR CHICKEN'],outside:['博物館入口','WALK INTO THE MUSEUM'],title:['展覽序章','PRESS F TO CONTINUE'],hall:['第一關 · 歷史長廊','CHAPTER 01 / GALLERY'],chapter2Intro:['第二關 · 雞蛋購買力','PRESS F TO START'],market:['第二關 · 雞蛋購買力','CHAPTER 02 / EGG QUIZ'],marketSuccess:['答對了！','CHALLENGE CLEARED'],dead:['GAME OVER','RESTART CHAPTER 02'],finish:['策展理念','EXHIBITION COMPLETE'],about:['關於我們','ABOUT US'],onlineMuseum:['線上博物館是什麼？','ONLINE MUSEUM']};
  const h=modes[game.mode]||modes.select;
  $('#levelName').textContent=h[0];$('#levelSubtitle').textContent=h[1];
- let score=['market','marketSuccess','dead','chapter2Intro'].includes(game.mode)?game.quizWins:game.mode==='finish'?5:game.seen.filter(Boolean).length;
- $('#progressText').textContent=['market','marketSuccess','dead','chapter2Intro'].includes(game.mode)?'答對題數 '+score+' / 5':'展品進度 '+score+' / 5';$('#progressFill').style.width= Math.min(100,score/5*100)+'%';
+ let score=['market','marketSuccess','dead','chapter2Intro'].includes(game.mode)?game.quizWins:['finish','about','onlineMuseum'].includes(game.mode)?5:game.seen.filter(Boolean).length;
+ $('#progressText').textContent=['market','marketSuccess','dead','chapter2Intro','finish','about','onlineMuseum'].includes(game.mode)?'答對題數 '+score+' / 5':'展品進度 '+score+' / 5';$('#progressFill').style.width= Math.min(100,score/5*100)+'%';
  hint.textContent=game.mode==='outside'?'WASD / 方向鍵：朝博物館大門前進':game.mode==='hall'?(nearExhibitIndex()>=0?'按 F 查看牆上的文物':'W / ↑ 向前走，靠近牆上展品按 F'):game.mode==='market'?'1／2／3 作答 · 答錯從第 1 題重來':game.mode==='select'?'選擇公雞、母雞或小雞':game.mode==='dead'?'按 R 重新挑戰第二關':'按 F 繼續';
 }
 function show(html,stage=''){overlay.classList.remove('hidden');overlay.classList.toggle('stage-overlay',Boolean(stage));if(stage)overlay.dataset.stage=stage;else delete overlay.dataset.stage;overlay.innerHTML=`<article class="panel">${html}</article>`;requestAnimationFrame(()=>{const first=overlay.querySelector('button');if(first)first.focus({preventScroll:true})})}
@@ -335,10 +357,20 @@ function continueGame(){if(game.mode==='title'){enterHall();return}
  if(game.mode==='chapter2Intro'){enterMarket();return}
  if(game.mode==='marketSuccess'){game.quiz++;if(game.quiz>=5)finish();else showQuestion();return}
  if(game.mode==='dead'){restartQuiz();return}
- if(game.mode==='finish'){startGame();return}
+ if(game.mode==='finish'){showAbout();return}
+ if(game.mode==='about'){showOnlineMuseum();return}
+ if(game.mode==='onlineMuseum'){renderSelect();return}
 }
 function restartQuiz(){game.quiz=0;game.quizWins=0;showQuestion()}
-function finish(){game.mode='finish';setHUD();beep(970,.15);show(`<div class="eyebrow">EXHIBITION COMPLETE / 策展理念</div><h2 class="display">恭喜通關！<br><span class="accent">貨幣不只是數字</span></h2><p class="intro">你跟著五件真實館藏，走過清末、日治、戰後、新臺幣改革及現代社會，也體驗了不同年代貨幣購買力的差異。</p><div class="end-cols"><div class="end-col"><strong>01｜貨幣與權力</strong><p>銀幣上的「臺灣製造」、日治銀行券的圖紋，都見證政權與貨幣發行制度的變遷。</p></div><div class="end-col"><strong>02｜貨幣與生活</strong><p>1940 年代末的通膨提醒我們：面額增加，未必代表生活更富裕；重要的是購買力。</p></div><div class="end-col"><strong>03｜貨幣與記憶</strong><p>新臺幣與紀念性塑膠鈔券，記錄臺灣經濟、社會和印製科技的變化。</p></div></div><div class="actions"><button class="button" data-action="restartAll">重新參觀 ↺</button><span class="secondary">感謝參觀《從清末到現代——臺灣貨幣的演變》</span></div>`,'finish')}
+function finish(){game.mode='finish';setHUD();beep(970,.15);show(`<div class="eyebrow">EXHIBITION COMPLETE / 策展理念</div><h2 class="display">恭喜通關！<br><span class="accent">貨幣不只是數字</span></h2><p class="intro">你跟著五件真實館藏，走過清末、日治、戰後、新臺幣改革及現代社會，也體驗了不同年代貨幣購買力的差異。</p><div class="end-cols"><div class="end-col"><strong>01｜貨幣與權力</strong><p>銀幣上的「臺灣製造」、日治銀行券的圖紋，都見證政權與貨幣發行制度的變遷。</p></div><div class="end-col"><strong>02｜貨幣與生活</strong><p>1940 年代末的通膨提醒我們：面額增加，未必代表生活更富裕；重要的是購買力。</p></div><div class="end-col"><strong>03｜貨幣與記憶</strong><p>新臺幣與紀念性塑膠鈔券，記錄臺灣經濟、社會和印製科技的變化。</p></div></div><div class="actions"><button class="button" data-action="continue">按 F · 繼續至關於我們 ▶</button><span class="secondary">感謝參觀《從清末到現代——臺灣貨幣的演變》</span></div>`,'finish')}
+function showAbout(){
+ game.mode='about';setHUD();beep(840,.14);
+ show(`<div class="eyebrow">ABOUT US / 第十組</div><h2 class="display">關於<span class="accent">我們</span></h2><div class="scene-divider" aria-hidden="true"></div><div class="credit-layout"><div class="credit-school">國立臺灣師範大學</div><div class="credit-course">博物館探索課程</div><div class="credit-group">第十組</div><div class="credit-members"><span class="members-label">組員</span><span class="member-names">劉耘菡、連思嫺、高陳羿</span></div></div><div class="actions"><button class="button" data-action="continue">按 F · 繼續 ▶</button></div>`,'about');
+}
+function showOnlineMuseum(){
+ game.mode='onlineMuseum';setHUD();beep(920,.14);
+ show(`<div class="eyebrow">ONLINE MUSEUM / 展覽的延伸</div><h2 class="display">線上博物館<span class="accent">是什麼？</span></h2><div class="scene-divider" aria-hidden="true"></div><blockquote class="online-museum-quote">「讓博物館的作用可以放大資訊擴及度、也增加跨年齡、跨國家的交流機會。」</blockquote><div class="actions"><button class="button" data-action="continue">按 F · 返回角色選擇 ↺</button></div>`,'online-museum');
+}
 function update(dt){
  if(game.mode==='outside'&&overlay.classList.contains('hidden')){
   let dx=(held.has('d')?1:0)-(held.has('a')?1:0),dy=(held.has('s')?1:0)-(held.has('w')?1:0);
@@ -360,7 +392,7 @@ function doKey(k){
  if(game.mode==='market'&&['1','2','3'].includes(k)){answerQuestion(Number(k)-1);return}
  if(game.mode==='dead'&&k==='r'){restartQuiz();return}
  if(k==='f'||k==='enter'){continueGame();return}
- if(game.mode==='finish'&&k==='r'){startGame();return}
+ if(['finish','about','onlineMuseum'].includes(game.mode)&&k==='r'){renderSelect();return}
 }
 window.addEventListener('keydown',e=>{let k=e.key.toLowerCase();const keyMap={arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'};k=keyMap[k]||k;if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright',' ','f','r','1','2','3'].includes(k))e.preventDefault();held.add(k);if(!e.repeat)doKey(k)});
 window.addEventListener('keyup',e=>{let k=e.key.toLowerCase();k={arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'}[k]||k;held.delete(k)});
